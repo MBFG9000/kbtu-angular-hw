@@ -1,11 +1,13 @@
-<main class="bg-transparent text-black selection:bg-gray-400 h-screen">
+<section
+  class="bg-transparent text-black selection:bg-gray-400 h-screen relative font-arimo"
+>
   <div id="parallax">
     <nav
-      class="grid place-items-center  w-full top-0 z-50"
+      class="absolute grid place-items-center w-full top-0 z-50"
       aria-label="Primary Navigation"
     >
       <a
-        href="/"
+        routerLink="home/"
         aria-label="Go Home"
         class="p-1 m-4 focus:outline-none focus-visible:ring-4 ring-softcyan rounded-4xl transition-shadow"
       >
@@ -21,12 +23,13 @@
           xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:svg="http://www.w3.org/2000/svg"
-          class="text-orange-600 w-32 sm:w-48 lg:w-56"
+          class="text-emerald-900 w-44 sm:w-48 lg:w-80 drop-shadow-xl drop-shadow-emerald-950/50"
         >
           <g id="g1" inkscape:groupmode="layer" inkscape:label="1">
             <g id="group-R5">
               <path
                 id="path2"
+                top
                 d="M 7500,5000 H 0 V 0 h 7500 v 5000"
                 style="
                   fill: transparent;
@@ -448,11 +451,191 @@
         </svg>
       </a>
     </nav>
-            <header class="min-h-screen flex flex-col justify-evenly items-center relative">
-            <img class="absolute  w-full -z-20" src="kolsay-image-2.jpg " aria-hidden="true">
-            <h1></h1>
-            <a></a>
+    <header
+      class="min-h-screen flex flex-col justify-evenly items-center relative"
+    >
+      <div
+        class="absolute bg-gradient-to-b inset-0 bottom-3/4 from-sky-300 to-transparent"
+      ></div>
+      <div
+        class="absolute bg-gradient-to-b inset-0 top-0 -bottom-32 from-gray-600/50 to-transparent"
+      ></div>
+      <img
+        class="absolute h-fit w-full -z-20 object-cover object-center"
+        [src]="photoUrl"
+        aria-hidden="true"
+      />
+      <h1
+        class="text-8xl text-center font-bold tracking-wide text-white py-12 mt-28 drop-shadow-xl drop-shadow-black/50"
+      >
+        Go Travel <br />Kazakhstan
+      </h1>
+      <a
+        (click)="scrollTo('contact')"
+        class="bg-emerald-700/70 border border-white text-white font-medium py-2 px-8 rounded-xl focus:outline-none focus-visible:ring-4 ring-softcyan ring-offset-softcyan ring-offset-2 hover:bg-emerald-800/90 flex space-x-3 drop-shadow-2xl drop-shadow-black/25 transition-shadow"
+      >
+        <span class="text-lg uppercase tracking-wide"
+          >Book a Trip <i-lucide [img]="Map" class="inline-block"></i-lucide
+        ></span>
+      </a>
+    </header>
 
-        </header>
+    <main
+      class="relative mx-0 mt-16 sm:mt-24 lg:mt-0 -mb-16 grid gap-16 sm:gap-24 lg:gap-40 overflow-hidden font-arimo"
+    >
+      <!-- pb-16 -->
+      <section
+        aria-labelledby="headline"
+        class="container grid gap-4 text-center max-w-6/12 mx-auto"
+      >
+        <div class="flex flex-col space-y-6">
+          <small
+            class="text-xl tracking-widest text-amber-300 uppercase drop-shadow-2xl drop-shadow-black/50"
+          >
+            Discover the Heart of Kazakhstan</small
+          >
+          <h2
+            id="headline"
+            class="text-3xl font-bold tracking-wide text-white drop-shadow-xl drop-shadow-black/50"
+          >
+            What "Go Travel Kazakhstan" is about
+          </h2>
+          <div
+            class="drop-shadow-xl drop-shadow-black text-white text-lg font-medium bg-bkg/60 px-10 py-5"
+          >
+            {{ description }}
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-0 relative">
+        <div
+          class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-gray-900"
+        ></div>
+        <div class="bg-gray-900 min-h-screen pt-50 mt-32" id="contact">
+          <div class="grid grid-cols-2 gap-12 w-full max-w-6xl mx-auto">
+            <div class="flex flex-col justify-center text-left">
+              <h2 class="text-5xl font-bold text-white mb-6">Get in touch</h2>
+              <p class="text-lg text-gray-300 leading-light mb-8">
+                {{ aboutUsdesc }}
+              </p>
+
+              <div class="space-y-3 text-gray-300">
+                <div class="flex items-center space-x-4">
+                  <span class="text-xl"
+                    ><i-lucide [img]="MapPin" class="inline-block"></i-lucide
+                  ></span>
+                  <p>123 Abai Street, Almaty, Kazakhstan</p>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                  <span class="text-xl"
+                    ><i-lucide [img]="Mails" class="inline-block"></i-lucide
+                  ></span>
+                  <p>example@gmail.com</p>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                  <span class="text-xl"
+                    ><i-lucide [img]="Headset" class="inline-block"></i-lucide
+                  ></span>
+                  <p>+7 (777) 123-45-67</p>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                  <span class="text-xl text-pink-600"
+                    ><i-lucide [img]="Instagram" class="inline-block"></i-lucide
+                  ></span>
+                  <a href="" target="_blank" class="hover:underline">
+                    instagram.com/yourprofile
+                  </a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                  <span class="text-green-500 text-xl"
+                    ><i-lucide
+                      [img]="MessageCircleMore"
+                      class="inline-block"
+                    ></i-lucide
+                  ></span>
+                  <a href="" target="_blank" class="hover:underline">
+                    WhatsApp Chat
+                  </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <button
+                    (click)="addLike()"
+                    class="hover:text-amber-500 text-2xl"
+                    [class.text-red-500]="likes >= 5"
+                  >
+                    <i-lucide [img]="Heart" class="inline-block"></i-lucide>
+                  </button>
+                  <span>{{ likes }}</span>
+                </div>
+              </div>
+            </div>
+
+<form
+  class="space-y-4 bg-gray-800 p-7 py-15 rounded-2xl shadow-lg"
+  (ngSubmit)="onSubmit()"
+>
+  <input
+    [(ngModel)]="userName"
+    name="userName"
+    type="text"
+    placeholder="Your Name"
+    class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+
+  <input
+    [(ngModel)]="email"
+    name="email"
+    type="email"
+    placeholder="Your Email"
+    class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+
+  <textarea
+    [(ngModel)]="message"
+    name="message"
+    rows="5"
+    placeholder="Your Message"
+    class="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  ></textarea>
+
+  <button
+    [disabled]="isButtonDisable"
+    type="submit"
+    class="w-full p-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:bg-gray-500 disabled:cursor-not-allowed"
+  >
+    Send Message
+  </button>
+</form>
+
+<!-- Сообщение после отправки -->
+            @if (subscribed) {
+           <p class="mt-4 text-green-400 font-semibold">
+  Thanks, {{ userName || 'friend' }}, we’ll be in touch! 🎉
+</p>
+            }
+
+          </div>
+          <div class="mt-6 text-left ml-60">
+            <button
+              [disabled]="isToggleDisabled"
+              (click)="toggleMessage()"
+              class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg shadow-md transition mt-5 disabled:bg-gray-600"
+            >
+              Toggle Message
+            </button>
+            
+            @if (showMessage) {
+           <h1 class="text-2xl  mt-4 text-amber-400 font-semibold">Thank you for visiting!</h1>
+            }
+
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
-</main>
+</section>

@@ -1,4 +1,4 @@
-
+/* 
 * {
     margin: 0;
     padding: 0;
@@ -51,7 +51,7 @@
     color: #4a90e2;
   }
   
-  /* Responsive adjustments */
+ 
   @media (max-width: 768px) {
     header {
       flex-direction: column;
@@ -66,4 +66,4 @@
       margin-right: 1rem;
     }
   }
-  
+   */
