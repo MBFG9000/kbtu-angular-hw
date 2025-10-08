@@ -1,26 +1,20 @@
-<section class="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 bg-amber-50 h-screen">
+<section class="h-screen bg-amber-50 flex flex-col  items-center">
+<section class="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 bg-amber-50 h-fit w-screen">
   @if (tours$ | async; as tours) {
     @if (tours.length === 0) {
       <p class="col-span-full text-center text-slate-500">No tours available right now. Please check back later.</p>
     } @else {
-      @for (tour of tours; track tour.id) {
-        <article class="flex h-fit flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl">
-          <img
-            [ngSrc]="tour.photo ?? '/mountains-logo.svg'"
-            width="480"
-            height="320"
-            decoding="async"
-            alt="{{ tour.title }}"
-            class="h-56 w-full object-cover"
-          />
-          <div class="flex flex-1 flex-col gap-3 p-6">
-            <h3 class="text-xl font-semibold text-slate-900">{{ tour.title }}</h3>
-            <p class="text-sm text-slate-600">{{ tour.description }}</p>
-          </div>
-        </article>
-      }
+      @if(enableTours){
+         @for (tour of tours; track tour.id) {
+        <app-tour [tour]="tour"></app-tour>
+       }}@else {
+        <p>no tours</p>
+       }
     }
-  } @else {
+      }
+   @else {
     <p class="col-span-full text-center text-slate-500">Loading tours...</p>
   }
+</section>
+<button  class="py-5 bg-emerald-800 h-4 w-2xs mx-auto rounded-2xl font-arimo text-xl flex justify-center items-center font-bold" (click) = "enableTours=!enableTours">TOURS</button>
 </section>
