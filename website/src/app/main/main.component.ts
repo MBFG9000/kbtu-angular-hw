@@ -34,6 +34,7 @@ export class MainComponent {
   isToggleDisabled: boolean = false;
   showMessage = false;
   userName: string = '';
+  userNameSaved:string = this.userName;
   email: string = '';
   message: string = '';
   subscribed: boolean = false;
@@ -45,6 +46,7 @@ export class MainComponent {
   onSubmit() {
     this.subscribed = true;
     // очищаем форму
+    this.userNameSaved = this.userName;
     this.userName = '';
     this.email = '';
     this.message = '';

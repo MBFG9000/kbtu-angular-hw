@@ -9,7 +9,7 @@
       <a
         routerLink="home/"
         aria-label="Go Home"
-        class="p-1 m-4 focus:outline-none focus-visible:ring-4 ring-softcyan rounded-4xl transition-shadow"
+        class="p-1 m-4 focus:outline-none focus-visible:ring-4 ring-softcyan rounded-4xl transition-shadow cursor-pointer"
       >
         <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
@@ -472,7 +472,9 @@
       </h1>
       <a
         (click)="scrollTo('contact')"
-        class="bg-emerald-700/70 border border-white text-white font-medium py-2 px-8 rounded-xl focus:outline-none focus-visible:ring-4 ring-softcyan ring-offset-softcyan ring-offset-2 hover:bg-emerald-800/90 flex space-x-3 drop-shadow-2xl drop-shadow-black/25 transition-shadow"
+        class="bg-emerald-700/70 border border-white text-white font-medium py-2 px-8 
+        rounded-xl focus:outline-none focus-visible:ring-4 ring-softcyan ring-offset-softcyan ring-offset-2 hover:bg-emerald-800/90 flex space-x-3
+         drop-shadow-2xl drop-shadow-black/25 transition-shadow cursor-pointer"
       >
         <span class="text-lg uppercase tracking-wide"
           >Book a Trip <i-lucide [img]="Map" class="inline-block"></i-lucide
@@ -612,15 +614,14 @@
   </button>
 </form>
 
-<!-- Сообщение после отправки -->
-            @if (subscribed) {
+
+@if (subscribed) {
            <p class="mt-4 text-green-400 font-semibold">
-  Thanks, {{ userName || 'friend' }}, we’ll be in touch! 🎉
-</p>
+            Thanks, {{ userNameSaved || 'friend' }}, we’ll be in touch! 🎉 </p>
             }
 
           </div>
-          <div class="mt-6 text-left ml-60">
+          <div class="mt-6 text-center">
             <button
               [disabled]="isToggleDisabled"
               (click)="toggleMessage()"
