@@ -1,10 +1,11 @@
-import { NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { tour } from '../shared/models/tours';
 
 @Component({
   selector: 'app-tour',
-  imports: [NgOptimizedImage],
+  imports: [CommonModule, NgOptimizedImage, RouterLink],
   templateUrl: './tour.component.html',
   styleUrl: './tour.component.css'
 })
