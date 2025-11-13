@@ -1,0 +1,13 @@
+<section class="sneakers-page">
+  <h1 class="title">Sneakers</h1>
+    @if (loading) {
+        <div>Loading…</div>
+    }
+    @else {
+        <div class="sneakers-grid" >
+            @for (s of sneakers;track s.id) {
+             <app-sneaker-card-sm [sneaker]="s"></app-sneaker-card-sm>
+            }
+        </div>
+    }
+</section>

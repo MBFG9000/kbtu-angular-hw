@@ -1,0 +1,12 @@
+<article class="card">
+  <div class="img-wrap">
+    <img [src]="sneaker.imageUrl" [alt]="sneaker.name" />
+  </div>
+
+  <h3>{{ sneaker.name }}</h3>
+  <p>{{ sneaker.brand }}</p>
+  <p class="price">{{ sneaker.price | currency:'USD' }}</p>
+  <p class="stock" [class.out]="!sneaker.inStock">
+    {{ sneaker.inStock ? 'In Stock' : 'Out of Stock' }}
+  </p>
+</article>
