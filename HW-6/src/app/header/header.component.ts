@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideAngularModule, HandMetal } from 'lucide-angular';
 
 @Component({
   
   standalone: true,
   selector: 'app-header',
-  imports: [RouterLink, LucideAngularModule],
+  imports: [RouterLink, RouterLinkActive, LucideAngularModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

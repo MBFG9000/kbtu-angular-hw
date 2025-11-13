@@ -67,6 +67,12 @@
   margin: 0;
 }
 
+.card__description {
+  color: #0f172a;
+  margin: 0.4rem 0 0;
+  font-size: 0.92rem;
+}
+
 .card__sizes span {
   font-weight: 600;
   color: #0f172a;

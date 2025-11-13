@@ -1,8 +1,11 @@
 <section class="detail-page">
-  <a routerLink="/sneakers" class="back-link">← Back to sneakers</a>
+  <button type="button" class="back-link" (click)="goBack()">← Back to items</button>
 
   @if (loading) {
     <div class="state-card">Loading sneaker details…</div>
+  }
+  @else if (notFound) {
+    <div class="state-card state-card--error">Sneaker not found.</div>
   }
   @else if (errorMessage) {
     <div class="state-card state-card--error">{{ errorMessage }}</div>
@@ -24,6 +27,10 @@
           Built in {{ sneaker.releaseYear }}, finished in {{ sneaker.color.toLowerCase() }} and tuned for
           everyday comfort.
         </p>
+        <p class="detail-description">
+          Designed for skyline-ready movement with foam cushioning and breathable mesh so you can stay light on your
+          feet.
+        </p>
 
         <div class="info-grid">
           <div class="info-item">
@@ -37,6 +44,22 @@
           <div class="info-item">
             <span>Verified stock</span>
             <strong>{{ sneaker.inStock ? 'Available' : 'Notify me' }}</strong>
+          </div>
+          <div class="info-item">
+            <span>Brand</span>
+            <strong>{{ sneaker.brand }}</strong>
+          </div>
+          <div class="info-item">
+            <span>SKU</span>
+            <strong>#{{ sneaker.id }}</strong>
+          </div>
+          <div class="info-item">
+            <span>Price</span>
+            <strong>{{ sneaker.price | currency:'USD' }}</strong>
+          </div>
+          <div class="info-item">
+            <span>Sizes available</span>
+            <strong>{{ sneaker.sizes?.length || 0 }} options</strong>
           </div>
         </div>
 
@@ -56,7 +79,7 @@
 
         <div class="actions">
           <button type="button" class="btn">Reserve pair</button>
-          <a routerLink="/sneakers" class="ghost-link">Return to catalog</a>
+          <a routerLink="/items" class="ghost-link">Return to catalog</a>
         </div>
       </div>
     </div>

@@ -12,9 +12,17 @@
 }
 
 .back-link {
-  text-decoration: none;
+  border: none;
+  background: transparent;
   color: #0ea5e9;
   font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
 }
 
 .detail-card {
@@ -74,9 +82,14 @@
   margin-bottom: 1.5rem;
 }
 
+.detail-description {
+  color: #475569;
+  margin: -0.5rem 0 1.5rem;
+}
+
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
 }
 
@@ -136,6 +149,12 @@
   padding: 0.85rem 1.8rem;
   font-weight: 600;
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);
 }
 
 .ghost-link {

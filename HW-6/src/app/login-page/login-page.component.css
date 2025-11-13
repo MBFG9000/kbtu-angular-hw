@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  min-height: calc(100vh - 80px);
+  background: radial-gradient(circle at top, rgba(14, 165, 233, 0.15), transparent 55%), #f4f9ff;
+  font-family: 'Arimo', sans-serif;
+}
+
+.login-placeholder {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.login-placeholder__card {
+  background: #ffffff;
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  border-radius: 32px;
+  padding: 3rem;
+  box-shadow: 0 30px 60px rgba(14, 165, 233, 0.15);
+  text-align: center;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #0ea5e9;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.login-placeholder__card h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.login-placeholder__card p:last-child {
+  color: #475569;
+  margin-bottom: 0;
+}

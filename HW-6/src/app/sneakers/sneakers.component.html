@@ -27,7 +27,19 @@
         <h2>Available now</h2>
         <p>{{ sneakers.length }} styles sourced from trusted partners.</p>
       </div>
-      <span class="catalog__chip">Skyblue / White palette</span>
+      <div class="catalog__side">
+        <span class="catalog__chip">Skyblue / White palette</span>
+        <label class="search-field">
+          <span class="sr-only">Search sneakers</span>
+          <input
+            #searchInput
+            type="search"
+            [value]="searchQuery"
+            (input)="handleSearch(searchInput.value)"
+            placeholder="Search by brand or name"
+          />
+        </label>
+      </div>
     </div>
 
     @if (loading) {
@@ -35,6 +47,17 @@
     }
     @else if (errorMessage) {
       <div class="state-card state-card--error">{{ errorMessage }}</div>
+    }
+    @else if (!sneakers.length) {
+      <div class="state-card state-card--muted">
+        No sneakers found
+        @if (searchQuery) {
+          <span>&nbsp;for “{{ searchQuery }}”.</span>
+        }
+        @else {
+          <span>. Try adjusting your search.</span>
+        }
+      </div>
     }
     @else {
       <div class="sneakers-grid">
