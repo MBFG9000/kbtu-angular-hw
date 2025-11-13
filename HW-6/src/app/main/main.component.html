@@ -1,1 +1,115 @@
-<h1>LOL</h1>
+<main class="main-page">
+  <section class="hero">
+    <div class="hero__content">
+      <span class="hero__chip">
+        <i-lucide [img]="Sparkles" size="16"></i-lucide>
+        Skyblue Collective
+      </span>
+      <h1>Step into cloud-soft energy with the newest sneaker drops.</h1>
+      <p class="hero__desc">
+        SneakHead curates limited releases, everyday staples, and collab pairs that keep
+        the skyline palette alive. Built for motion, delivered with care.
+      </p>
+      <div class="hero__cta">
+        <a routerLink="/sneakers" class="btn btn--primary">
+          <i-lucide [img]="ShoppingBag" size="18"></i-lucide>
+          Shop sneakers
+        </a>
+        <button type="button" class="btn btn--ghost">
+          Join waitlist
+          <i-lucide [img]="ArrowUpRight" size="18"></i-lucide>
+        </button>
+      </div>
+      <div class="hero__metrics">
+        @for (metric of heroMetrics; track metric.label) {
+          <div class="metric">
+            <p class="metric__value">{{ metric.value }}</p>
+            <p class="metric__label">{{ metric.label }}</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero__badge">
+        <span>Limited glow</span>
+      </div>
+      <img src="https://images.unsplash.com/photo-1528701800489-20be3c18f572?auto=format&fit=crop&w=900&q=80" alt="Featured sneakers on neon background" />
+      <div class="hero__card">
+        <p class="hero__card-title">Nova Cloud Pods</p>
+        <p>97% of members recommend</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Featured drops</p>
+        <h2>Curated pairs for every move</h2>
+      </div>
+      <a routerLink="/sneakers" class="link">
+        Browse all
+        <i-lucide [img]="ArrowUpRight" size="17"></i-lucide>
+      </a>
+    </div>
+    <div class="featured__grid">
+      @for (drop of featuredDrops; track drop.name) {
+        <article class="drop-card">
+          <span class="drop-card__tag">{{ drop.tag }}</span>
+          <img [src]="drop.image" [alt]="drop.name" loading="lazy" />
+          <h3>{{ drop.name }}</h3>
+          <p class="drop-card__accent">{{ drop.accent }}</p>
+          <div class="drop-card__footer">
+            <span class="price">{{ drop.price | currency:'USD' }}</span>
+            <a routerLink="/sneakers" class="ghost-link">Shop now</a>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="perks">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Membership perks</p>
+        <h2>Designed for collectors</h2>
+      </div>
+    </div>
+    <div class="perks__grid">
+      @for (perk of perks; track perk.title) {
+        <article class="perk-card">
+          <i-lucide [img]="perk.icon" size="26"></i-lucide>
+          <div>
+            <h3>{{ perk.title }}</h3>
+            <p>{{ perk.description }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="lookbook">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Lookbook</p>
+        <h2>Skyblue stories from the community</h2>
+      </div>
+      <a href="https://instagram.com" target="_blank" rel="noreferrer" class="link">
+        <i-lucide [img]="Instagram" size="18"></i-lucide>
+        Follow @SneakHead
+      </a>
+    </div>
+    <div class="lookbook__grid">
+      @for (spot of lookbookSpots; track spot.title) {
+        <article class="look-card">
+          <img [src]="spot.image" [alt]="spot.title" loading="lazy" />
+          <div class="look-card__body">
+            <p class="eyebrow">{{ spot.title }}</p>
+            <p>{{ spot.description }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</main>

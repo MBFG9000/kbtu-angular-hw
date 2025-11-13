@@ -5,12 +5,14 @@ import { BlogComponent } from './blog/blog.component';
 import { ToursComponent } from './tours/tours.component';
 import { TourAboutComponent } from './tour-about/tour-about.component';
 import { SneakersComponent } from './sneakers/sneakers.component';
+import { DetailedSneakersComponent } from './detailed-sneakers/detailed-sneakers.component';
 
 export const routes: Routes = [
     { path: 'home', component: MainComponent },
     { path: 'about', component: AboutComponent },
     { path: 'blog', component: BlogComponent },
     { path: 'sneakers', component: SneakersComponent},
+    { path: 'sneakers/:id', component: DetailedSneakersComponent },
     { path: 'tours', component: ToursComponent },
     { path: 'tours/:id', component: TourAboutComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full'}  

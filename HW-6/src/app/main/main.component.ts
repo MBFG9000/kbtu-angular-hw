@@ -1,67 +1,82 @@
 import { Component } from '@angular/core';
-import { LucideAngularModule, Map, Mails, MapPin, Headset, Instagram, MessageCircleMore, Heart } from 'lucide-angular';
+import { LucideAngularModule, Sparkles, ShoppingBag, ShieldCheck, Star, Truck, Instagram, ArrowUpRight } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-main',
-  imports: [LucideAngularModule, RouterLink, FormsModule],
+  imports: [LucideAngularModule, RouterLink, CurrencyPipe],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
 export class MainComponent {
-  readonly Map = Map;
-  readonly Mails = Mails;
-  readonly MapPin = MapPin;
-  readonly Headset = Headset;
+  readonly Sparkles = Sparkles;
+  readonly ShoppingBag = ShoppingBag;
+  readonly ShieldCheck = ShieldCheck;
+  readonly Star = Star;
+  readonly Truck = Truck;
   readonly Instagram = Instagram;
-  readonly MessageCircleMore = MessageCircleMore
-  readonly Heart = Heart;
+  readonly ArrowUpRight = ArrowUpRight;
 
-  likes = 0;
+  heroMetrics = [
+    { label: 'Pairs shipped', value: '120K+' },
+    { label: 'Members worldwide', value: '48K' },
+    { label: 'New drops monthly', value: '12' }
+  ];
 
-  description:string = `
-          At Go Travel Kazakhstan, we turn every journey into an unforgettable
-            adventure. From the majestic peaks of the Tian Shan mountains to the
-            serene beauty of Kolsai Lakes, we help you explore the hidden gems
-            and vibrant culture of our incredible country. Let your wanderlust
-            guide you — Kazakhstan is waiting to inspire you.
-  
-  `;
-  aboutUsdesc:string = `Have a question or want to plan your trip? Get in touch with our team — we’re here to help!`
-  photoUrl: string = 'kolsay-image-2.jpg';
-  isToggleDisabled: boolean = false;
-  showMessage = false;
-  userName: string = '';
-  userNameSaved:string = this.userName;
-  email: string = '';
-  message: string = '';
-  subscribed: boolean = false;
-  
-  get isButtonDisable() {
-    return !this.userName || !this.email || !this.message;
-  }
+  featuredDrops = [
+    {
+      tag: 'Daily comfort',
+      name: 'AeroPulse 2.0',
+      price: 189,
+      accent: 'Soft foam cloud',
+      image: 'https://images.unsplash.com/photo-1529385101576-4e90c1dcd1d5?auto=format&fit=crop&w=900&q=80'
+    },
+    {
+      tag: 'Performance',
+      name: 'Velocity Run LX',
+      price: 220,
+      accent: 'Carbon midsole',
+      image: 'https://images.unsplash.com/photo-1514986888952-8cd320577b68?auto=format&fit=crop&w=900&q=80'
+    },
+    {
+      tag: 'Limited',
+      name: 'Skyline Drip 01',
+      price: 260,
+      accent: 'Reflective knit',
+      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80'
+    }
+  ];
 
-  onSubmit() {
-    this.subscribed = true;
-    // очищаем форму
-    this.userNameSaved = this.userName;
-    this.userName = '';
-    this.email = '';
-    this.message = '';
-  }
+  perks = [
+    {
+      title: 'Priority shipping',
+      description: 'Fast worldwide delivery on every pair, free over $120.',
+      icon: Truck
+    },
+    {
+      title: 'Member rewards',
+      description: 'Exclusive access to early drops and private restocks.',
+      icon: Star
+    },
+    {
+      title: 'Authenticity first',
+      description: 'Every sneaker is hand-checked and comes with a digital tag.',
+      icon: ShieldCheck
+    }
+  ];
 
-  scrollTo(section: string) {
-    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  addLike() {
-  this.likes++;
-  }
-  
-
-  toggleMessage() {
-  this.showMessage = !this.showMessage;
-  }
+  lookbookSpots = [
+    {
+      title: 'City Night Run',
+      description: 'Reflective uppers keep the pace visible after sunset.',
+      image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1200&q=80'
+    },
+    {
+      title: 'Weekend Courts',
+      description: 'Retro palettes built for the streetball revival.',
+      image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1200&q=80'
+    }
+  ];
 }

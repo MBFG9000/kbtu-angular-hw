@@ -1,0 +1,64 @@
+<section class="detail-page">
+  <a routerLink="/sneakers" class="back-link">← Back to sneakers</a>
+
+  @if (loading) {
+    <div class="state-card">Loading sneaker details…</div>
+  }
+  @else if (errorMessage) {
+    <div class="state-card state-card--error">{{ errorMessage }}</div>
+  }
+  @else if (sneaker) {
+    <div class="detail-card">
+      <div class="detail-card__media">
+        <img [src]="sneaker.imageUrl" [alt]="sneaker.name" />
+        <span class="status" [class.status--out]="!sneaker.inStock">
+          {{ sneaker.inStock ? 'Ready to ship' : 'Currently restocking' }}
+        </span>
+      </div>
+
+      <div class="detail-card__content">
+        <p class="eyebrow">{{ sneaker.brand }}</p>
+        <h1>{{ sneaker.name }}</h1>
+        <p class="price">{{ sneaker.price | currency:'USD' }}</p>
+        <p class="lead">
+          Built in {{ sneaker.releaseYear }}, finished in {{ sneaker.color.toLowerCase() }} and tuned for
+          everyday comfort.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <span>Release year</span>
+            <strong>{{ sneaker.releaseYear }}</strong>
+          </div>
+          <div class="info-item">
+            <span>Colorway</span>
+            <strong>{{ sneaker.color }}</strong>
+          </div>
+          <div class="info-item">
+            <span>Verified stock</span>
+            <strong>{{ sneaker.inStock ? 'Available' : 'Notify me' }}</strong>
+          </div>
+        </div>
+
+        <div class="sizes">
+          <p>Sizes</p>
+          @if (sneaker.sizes?.length) {
+            <div class="size-list">
+              @for (size of sneaker.sizes; track size) {
+                <span>{{ size }}</span>
+              }
+            </div>
+          }
+          @else {
+            <div class="size-list size-list--empty">Sizing information on the way.</div>
+          }
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn">Reserve pair</button>
+          <a routerLink="/sneakers" class="ghost-link">Return to catalog</a>
+        </div>
+      </div>
+    </div>
+  }
+</section>
