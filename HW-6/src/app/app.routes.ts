@@ -11,13 +11,10 @@ import { LoginPageComponent } from './login-page/login-page.component';
 export const routes: Routes = [
     { path: 'home', component: MainComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'blog', component: BlogComponent },
     { path: 'items', component: SneakersComponent },
     { path: 'items/:id', component: DetailedSneakersComponent },
     { path: 'sneakers', redirectTo: 'items', pathMatch: 'full' },
     { path: 'sneakers/:id', component: DetailedSneakersComponent },
     { path: 'login', component: LoginPageComponent },
-    { path: 'tours', component: ToursComponent },
-    { path: 'tours/:id', component: TourAboutComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full'}  
 ];
