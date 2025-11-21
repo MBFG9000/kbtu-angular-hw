@@ -1,0 +1,42 @@
+<header class="header">
+  <div class="brand">
+    <div class="logo">
+      <i-lucide [img]="HandMetal"  [size]="30" class="logo__icon"></i-lucide>
+      <span class="logo__text">SneakHead</span>
+    </div>
+  </div>
+
+  <div class="nav">
+    <nav class="main-nav">
+      <ul class="main-nav__list">
+        <li
+          class="main-nav__item"
+          routerLinkActive="main-nav__item--active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a routerLink="/home">Home</a>
+        </li>
+        <li class="main-nav__item" routerLinkActive="main-nav__item--active">
+          <a routerLink="/about">About Us</a>
+        </li>
+        <li class="main-nav__item" routerLinkActive="main-nav__item--active">
+          <a routerLink="/items">Sneakers</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="actions">
+    <ng-container *ngIf="user$ | async as user; else loggedOut">
+      <a routerLink="/profile" routerLinkActive="login-btn--active" class="link-btn">Profile</a>
+      <button type="button" class="logout-btn" (click)="logout()" [disabled]="isLoggingOut">
+        <span *ngIf="!isLoggingOut">Logout</span>
+        <span *ngIf="isLoggingOut">Logging out...</span>
+      </button>
+    </ng-container>
+    <ng-template #loggedOut>
+      <a routerLink="/login" routerLinkActive="login-btn--active" [routerLinkActiveOptions]="{ exact: true }" class="login-btn">Login</a>
+      <a routerLink="/signup" routerLinkActive="login-btn--active" class="signup-btn">Sign up</a>
+    </ng-template>
+  </div>
+</header>

@@ -1,0 +1,70 @@
+<section class="sneakers-page">
+  <div class="sneakers-hero">
+    <div class="hero__copy">
+      <p class="eyebrow">SneakHead catalog</p>
+      <h1>Skyblue-ready sneakers built for motion.</h1>
+      <p>
+        Explore limited releases, basketball icons, and cushioned runners curated by the SneakHead crew.
+        Filter-free for now—just clean lines and verified pairs.
+      </p>
+      <div class="hero__highlights">
+        @for (item of heroHighlights; track item.label) {
+          <div class="highlight">
+            <p class="highlight__value">{{ item.value }}</p>
+            <p class="highlight__label">{{ item.label }}</p>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="hero__media">
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80" alt="Sneaker flatlay" />
+    </div>
+  </div>
+
+  <div class="catalog">
+    <div class="catalog__head">
+      <div>
+        <h2>Available now</h2>
+        <p>{{ sneakers.length }} styles sourced from trusted partners.</p>
+      </div>
+      <div class="catalog__side">
+        <span class="catalog__chip">Skyblue / White palette</span>
+        <label class="search-field">
+          <span class="sr-only">Search sneakers</span>
+          <input
+            #searchInput
+            type="search"
+            [value]="searchQuery"
+            (input)="handleSearch(searchInput.value)"
+            placeholder="Search by brand or name"
+          />
+        </label>
+      </div>
+    </div>
+
+    @if (loading) {
+      <div class="state-card">Loading lineup…</div>
+    }
+    @else if (errorMessage) {
+      <div class="state-card state-card--error">{{ errorMessage }}</div>
+    }
+    @else if (!sneakers.length) {
+      <div class="state-card state-card--muted">
+        No sneakers found
+        @if (searchQuery) {
+          <span>&nbsp;for “{{ searchQuery }}”.</span>
+        }
+        @else {
+          <span>. Try adjusting your search.</span>
+        }
+      </div>
+    }
+    @else {
+      <div class="sneakers-grid">
+        @for (s of sneakers; track s.id) {
+          <app-sneaker-card-sm [sneaker]="s"></app-sneaker-card-sm>
+        }
+      </div>
+    }
+  </div>
+</section>
