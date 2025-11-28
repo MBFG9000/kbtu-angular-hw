@@ -1,5 +1,5 @@
 // src/app/sneakers/state/sneakers.effects.ts
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -9,10 +9,9 @@ import { DataService } from '../../data.service'; // путь подгони п�
 
 @Injectable()
 export class SneakersEffects {
-  constructor(
-    private actions$: Actions,
-    private dataService: DataService
-  ) {}
+  // use inject to avoid undefined references during field initialization
+  private readonly actions$ = inject(Actions);
+  private readonly dataService = inject(DataService);
 
   // ===== ЗАГРУЗКА СПИСКА КРОССОВОК =====
   loadSneakers$ = createEffect(() =>
@@ -48,20 +47,24 @@ export class SneakersEffects {
   loadSneaker$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SneakersActions.loadSneaker),
-      switchMap(({ id }) =>
-        this.dataService.getSneakerById(id).pipe( // предполагаемый метод
+      switchMap(({ id }) => {
+        const sneakerId = Number(id);
+
+        return this.dataService.getSneaker(sneakerId).pipe(
           map((sneaker) =>
             SneakersActions.loadSneakerSuccess({ sneaker })
           ),
           catchError((error) =>
             of(
               SneakersActions.loadSneakerFailure({
-                error: 'Failed to load sneaker details. Please try again.',
+                error: error?.status === 404
+                  ? 'Sneaker not found.'
+                  : 'Failed to load sneaker details. Please try again.',
               })
             )
           )
-        )
-      )
+        );
+      })
     )
   );
 }

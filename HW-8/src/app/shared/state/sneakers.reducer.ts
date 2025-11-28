@@ -63,6 +63,7 @@ export const sneakersReducer = createReducer(
   // loadSneaker — запрос деталей
   on(SneakersActions.loadSneaker, (state): SneakersState => ({
     ...state,
+    selectedSneaker: null,
     detailsLoading: true,
     detailsError: null,
   })),
@@ -78,6 +79,7 @@ export const sneakersReducer = createReducer(
   // loadSneakerFailure — ошибка при загрузке одного sneaker
   on(SneakersActions.loadSneakerFailure, (state, { error }): SneakersState => ({
     ...state,
+    selectedSneaker: null,
     detailsLoading: false,
     detailsError: error,
   }))

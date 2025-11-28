@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, of } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { Sneaker } from '../shared/models/sneakers.model';
-import { DataService } from '../data.service';
 import { SneakerCardSmComponent } from '../sneaker-card-sm/sneaker-card-sm.component';
+import { Store } from '@ngrx/store';
+import { selectListError, selectListLoading, selectSneakers } from '../shared/state/sneakers.selectors';
+import * as SneakersActions from '../shared/state/sneakers.actions';
 
 
 @Component({
@@ -20,7 +22,7 @@ export class SneakersComponent implements OnInit, OnDestroy {
   loading = false;
   errorMessage = '';
   searchQuery = '';
-  private queryParamSub?: Subscription;
+  private subscriptions = new Subscription();
 
   heroHighlights = [
     { label: 'Weekly drops', value: '6 new pairs' },
@@ -28,39 +30,41 @@ export class SneakersComponent implements OnInit, OnDestroy {
     { label: 'Members online', value: '2.4K' }
   ];
 
-  constructor(private dataSevice: DataService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private store: Store,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.queryParamSub = this.route.queryParamMap
-      .pipe(
-        map((params) => params.get('q') ?? ''),
-        distinctUntilChanged(),
-        tap((query) => (this.searchQuery = query)),
-        debounceTime(300),
-        tap(() => {
-          this.loading = true;
-          this.errorMessage = '';
-        }),
-        switchMap((query) => {
-          const request$ = query ? this.dataSevice.searchSneakers(query) : this.dataSevice.getSneakers();
-          return request$.pipe(
-            catchError(() => {
-              this.errorMessage = query
-                ? 'Unable to search right now. Try again shortly.'
-                : 'Something went wrong while loading the catalog. Please try again.';
-              return of([]);
-            })
-          );
-        })
-      )
-      .subscribe((data) => {
-        this.sneakers = data;
-        this.loading = false;
-      });
+    this.subscriptions.add(
+      this.store.select(selectSneakers).subscribe((items) => (this.sneakers = items))
+    );
+
+    this.subscriptions.add(
+      this.store.select(selectListLoading).subscribe((isLoading) => (this.loading = isLoading))
+    );
+
+    this.subscriptions.add(
+      this.store.select(selectListError).subscribe((error) => (this.errorMessage = error ?? ''))
+    );
+
+    this.subscriptions.add(
+      this.route.queryParamMap
+        .pipe(
+          map((params) => params.get('q') ?? ''),
+          map((query) => query.trim()),
+          distinctUntilChanged(),
+          tap((query) => (this.searchQuery = query)),
+          debounceTime(300),
+          tap((query) => this.store.dispatch(SneakersActions.loadSneakers({ query })))
+        )
+        .subscribe()
+    );
   }
 
   ngOnDestroy(): void {
-    this.queryParamSub?.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   handleSearch(query: string): void {
