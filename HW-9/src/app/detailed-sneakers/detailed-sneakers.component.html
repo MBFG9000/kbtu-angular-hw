@@ -1,0 +1,87 @@
+<section class="detail-page">
+  <button type="button" class="back-link" (click)="goBack()">← Back to items</button>
+
+  @if (loading) {
+    <div class="state-card">Loading sneaker details…</div>
+  }
+  @else if (notFound) {
+    <div class="state-card state-card--error">Sneaker not found.</div>
+  }
+  @else if (errorMessage) {
+    <div class="state-card state-card--error">{{ errorMessage }}</div>
+  }
+  @else if (sneaker) {
+    <div class="detail-card">
+      <div class="detail-card__media">
+        <img [src]="sneaker.imageUrl" [alt]="sneaker.name" />
+        <span class="status" [class.status--out]="!sneaker.inStock">
+          {{ sneaker.inStock ? 'Ready to ship' : 'Currently restocking' }}
+        </span>
+      </div>
+
+      <div class="detail-card__content">
+        <p class="eyebrow">{{ sneaker.brand }}</p>
+        <h1>{{ sneaker.name }}</h1>
+        <p class="price">{{ sneaker.price | currency:'USD' }}</p>
+        <p class="lead">
+          Built in {{ sneaker.releaseYear }}, finished in {{ sneaker.color.toLowerCase() }} and tuned for
+          everyday comfort.
+        </p>
+        <p class="detail-description">
+          Designed for skyline-ready movement with foam cushioning and breathable mesh so you can stay light on your
+          feet.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <span>Release year</span>
+            <strong>{{ sneaker.releaseYear }}</strong>
+          </div>
+          <div class="info-item">
+            <span>Colorway</span>
+            <strong>{{ sneaker.color }}</strong>
+          </div>
+          <div class="info-item">
+            <span>Verified stock</span>
+            <strong>{{ sneaker.inStock ? 'Available' : 'Notify me' }}</strong>
+          </div>
+          <div class="info-item">
+            <span>Brand</span>
+            <strong>{{ sneaker.brand }}</strong>
+          </div>
+          <div class="info-item">
+            <span>SKU</span>
+            <strong>#{{ sneaker.id }}</strong>
+          </div>
+          <div class="info-item">
+            <span>Price</span>
+            <strong>{{ sneaker.price | currency:'USD' }}</strong>
+          </div>
+          <div class="info-item">
+            <span>Sizes available</span>
+            <strong>{{ sneaker.sizes?.length || 0 }} options</strong>
+          </div>
+        </div>
+
+        <div class="sizes">
+          <p>Sizes</p>
+          @if (sneaker.sizes?.length) {
+            <div class="size-list">
+              @for (size of sneaker.sizes; track size) {
+                <span>{{ size }}</span>
+              }
+            </div>
+          }
+          @else {
+            <div class="size-list size-list--empty">Sizing information on the way.</div>
+          }
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn">Reserve pair</button>
+          <a routerLink="/items" class="ghost-link">Return to catalog</a>
+        </div>
+      </div>
+    </div>
+  }
+</section>
